@@ -3,7 +3,7 @@
 const {expect} = require('chai');
 
 const baseEmitterMethods = require('./helpers/base-emitter-methods');
-const emitter = require('../lib/base-emitter');
+const emitter = require('..').getBaseEmitter;
 
 describe('emitter', () => {
   it('should be a function', () => {

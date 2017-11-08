@@ -1,8 +1,7 @@
 // test/serializer-test.js
 
 const {expect} = require('chai');
-const getSerializer = require('../lib/serializer');
-const getBaseEmitter = require('../lib/base-emitter');
+const {getSerializer, getBaseEmitter} = require('..');
 
 describe('Serializer', () => {
   let serializer;
@@ -51,6 +50,12 @@ describe('Serializer', () => {
     });
   });
 
+  context('serializing a symbol', () => {
+    it('should return `Symbol(hello)` for symbol', () => {
+      expect(serializer(Symbol('hello'))).to.eq('Symbol(hello)');
+    });
+  });
+
   context('serializing an array', () => {
     it('should return `[1, 2, 3]` for [1, 2, 3] array', () => {
       expect(serializer([1, 2, 3])).to.eq('[1, 2, 3]');
@@ -71,7 +76,11 @@ describe('Serializer', () => {
     });
 
     it('should skip too deep nesting', () => {
-      expect(serializer({a: {a: {a: {a: {a: {a: {a: 1}}}}}}})).to.eq('{a: {a: {a: {a: {a: ...}}}}}');
+      expect(serializer({a: {b: {c: {d: {e: {f: {g: 1}}}}}}})).to.eq('{a: {b: {c: {d: {e: ...}}}}}');
+    });
+
+    it('should return {a: 1, b: 2} for an object', () => {
+      expect(serializer({a: 1, b: 2})).to.eq('{a: 1, b: 2}');
     });
   });
 });

@@ -6,6 +6,8 @@ const methodNames = [
   'aSymbol',
   'startArray', 'endArray',
   'startObject', 'endObject',
+  'endItem',
+  'nextLine',
   'objectKey',
   'symbol', 'keyword', 'indent'
 ];
