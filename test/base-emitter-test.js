@@ -107,6 +107,14 @@ describe('emitter', () => {
       it('should return `(c, d) => {...}` for arrow function', () => {
         expect(aFunction('(c, d) => { var j = 7; }')).to.eq('(c, d) => {...}');
       });
+
+      it('should return `(b = {c: {}}) => {...}` for arrow function', () => {
+        expect(aFunction((b = {c: {}}) => {})).to.eq('(b = {c: {}}) => {...}');
+      });
+
+      it('should return `(b = ")=>{", c = {}) => {...}` for arrow function', () => {
+        expect(aFunction((b = ")=>{", c = {}) => {})).to.eq('(b = ")=>{", c = {}) => {...}');
+      });
     });
 
     context('#symbol', () => {
